@@ -40,7 +40,7 @@ abstract class AbstractController
     {
         return $this->response->json([
             'code' => 0,
-            'request_id' => '',
+            'request_id' => $this->container->get("request_id"),
             'msg' => $msg,
             'data' => $data,
         ]);
@@ -50,7 +50,7 @@ abstract class AbstractController
     {
         return $this->response->json([
             'code' => $code,
-            'request_id' => '',
+            'request_id' => $this->container->get("request_id"),
             'msg' => $msg,
             'data' => $data,
         ]);
