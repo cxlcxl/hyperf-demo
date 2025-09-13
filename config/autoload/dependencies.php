@@ -12,9 +12,7 @@ declare(strict_types=1);
 
 use App\Service\LoginUserInterface;
 use App\Service\LoginUserService;
-use App\Service\JwtService;
 
 return [
     LoginUserInterface::class => LoginUserService::class,
-    JwtService::class => JwtService::class,
 ];

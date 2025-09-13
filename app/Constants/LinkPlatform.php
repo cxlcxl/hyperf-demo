@@ -18,6 +18,7 @@ use Hyperf\Constants\Annotation\Constants;
 #[Constants]
 class LinkPlatform extends AbstractConstants
 {
+    public const ZFB = 18;
     public const CUT = 90; // 砍价
     public const MT = 91;
     public const JD = 92;

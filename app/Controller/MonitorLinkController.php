@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Middleware\LoginAuthMiddleware;
+use App\Service\MonitorLink\JdMonitorLinkService;
+use Exception;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\RequestMapping;
@@ -21,12 +23,17 @@ use Hyperf\HttpServer\Annotation\RequestMapping;
 #[Middleware(LoginAuthMiddleware::class)]
 class MonitorLinkController extends AbstractController
 {
-    #[RequestMapping(path: 'jd-list', methods: 'get')]
-    public function JDLinkList()
+    #[RequestMapping(path: 'jd-list', methods: 'POST')]
+    public function jdLinkList()
     {
-        return $this->success([
-            'a' => $this->loginUser->userId(),
-            'b' => '萨德法撒旦法撒旦法三的',
-        ]);
+        try {
+            $params = $this->request->post('conditions', []);
+            $page = $this->request->post('page', 1);
+            $pageSize = $this->request->post('page_size', 20);
+            $result = (new JdMonitorLinkService())->linkList($params, $page, $pageSize);
+            return $this->success($result);
+        } catch (Exception $e) {
+            return $this->fail($e->getMessage());
+        }
     }
 }
