@@ -48,4 +48,33 @@ return [
             ],
         ],
     ],
+    'pg_default' => [
+        'driver' => env('PG_DB_DRIVER', 'pgsql'),
+        'host' => env('PG_DB_HOST', 'localhost'),
+        'database' => env('PG_DB_DATABASE', 'hyperf'),
+        'port' => env('PG_DB_PORT', 5432),
+        'username' => env('PG_DB_USERNAME', 'postgres'),
+        'password' => env('PG_DB_PASSWORD'),
+        'charset' => env('PG_DB_CHARSET', 'utf8'),
+        'pool' => [
+            'min_connections' => 1,
+            'max_connections' => 10,
+            'connect_timeout' => 10.0,
+            'wait_timeout' => 3.0,
+            'heartbeat' => -1,
+            'max_idle_time' => (float) env('DB_MAX_IDLE_TIME', 60),
+        ],
+        'cache' => [
+            'handler' => Hyperf\ModelCache\Handler\RedisHandler::class,
+            'cache_key' => '{mc:%s:m:%s}:%s:%s',
+            'prefix' => 'default',
+            'ttl' => 3600 * 24,
+            'empty_model_ttl' => 600,
+            'load_script' => true,
+        ],
+        'options' => [
+            PDO::ATTR_CASE => PDO::CASE_NATURAL,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ],
+    ]
 ];

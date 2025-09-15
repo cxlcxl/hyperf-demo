@@ -7,6 +7,7 @@ namespace App\Model;
 class MonitorLinkModel extends Model
 {
     protected ?string $table = 'monitor_link';
+    public ?string $connection = 'pg_default';
 
     /**
      * The attributes that are mass assignable.
